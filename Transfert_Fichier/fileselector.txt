@@ -1,0 +1,6 @@
+JFileChooser choose = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            int returnValue = choose.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selecter = choose.getSelectedFile();
+                System.out.println(selecter.getAbsolutePath());
+            }

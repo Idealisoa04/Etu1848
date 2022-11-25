@@ -97,7 +97,7 @@ public class Server{
         ObjectOutputStream message2 = new ObjectOutputStream(os2);
         message2.writeObject(obj1);
     }
-    public void verify() throws Exception{                      ///verifie l action que le client veut effectue et agit selon cette action 
+    public boolean verify() throws Exception{                      ///verifie l action que le client veut effectue et agit selon cette action 
         try {
             Socket client = this.getServer().accept();           
             InputStream is = client.getInputStream(); 
@@ -109,11 +109,11 @@ public class Server{
             if (String.valueOf(obj1).equalsIgnoreCase("upload")) {
                 this.getSend();
             }
-            
              
         } catch (Exception e) {
             //TODO: handle exception
         }
+        return true;
     }
     public int getPort() {
         return port;
