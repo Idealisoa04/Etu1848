@@ -1,0 +1,67 @@
+package server;
+import java.io.*;
+import java.net.*;
+public class Client {
+    int port;
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+    public int getPort() {
+        return port;
+    }
+    public  void send(String txt) {
+        try {   
+            Socket client = new Socket("localhost" , this.getPort());                                 //serveur dans ce pc local et le port pour communiquer
+            // InputStream is = client.getInputStream();                                       //lire le message envoyé
+            // ObjectInputStream message = new ObjectInputStream(is);
+            // Object obj  = message.readObject();                                             //lecture de l'objet envoyé
+            // System.out.println(" obj :  "+obj);                                             //13 de l'objet   
+                                     
+            OutputStream output = client.getOutputStream();                                 //pour avoir l'objet envoyé
+            Object msg = txt ;                                                          //message a envoyer
+            ObjectOutputStream objoutput = new ObjectOutputStream(output);                  //ce qui envoye le message
+            objoutput.writeObject(msg);                                                      
+            
+//fermeture de la mémoire tampon 
+            // is.close();
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+}
+/////server/////
+
+package server;
+import java.io.*;
+import java.net.*;
+
+public class Server{
+    public static void main(String[] args) {
+        try {
+            ServerSocket server = new ServerSocket( 2004 );               //création du serveur, avec le port cree 
+            Object obj  = "Test serveur";                                   //objet a envoyé
+            Socket client = server.accept();                                   //client pour communiquer
+            OutputStream os = client.getOutputStream();                         //send message au client
+            ObjectOutputStream message = new ObjectOutputStream(os);  
+            message.writeObject(obj);                                           //envoie de l'obj
+            
+            InputStream is = client.getInputStream(); 
+            ObjectInputStream msg = new ObjectInputStream(is);  
+            Object obj1  = msg.readObject();                                            
+            System.out.println(" obj1 :  "+obj1);          //pour l'envoie de l'objet
+            client.close();                                                        //fermer la mémoire tampon
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+        }
+    }
+}
+
+/////download/////
+String home = System.getProperty("user.home");
+            File fichier = new File(home+"/Downloads/create2.txt");
+            fichier.createNewFile();
