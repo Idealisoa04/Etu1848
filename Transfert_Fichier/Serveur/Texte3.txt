@@ -1,0 +1,4 @@
+ertyuiop//^fghjklm//tyuiop=>Texte58.txt
+dfghjkl;//dfghjkl;'\//wertyuiop[]//dsfghjkl;'\//dfghjkl;'\=>Texte89.txt
+1-1)find /usr/include -name "*.h" -print//  2)//2-1)head -5 /etc/passwd//   tail -5 /etc/passwd//  2)////Exercice 4//1-head -2 fichier; tail +3 fichier | sort -t '\t' -k2n////2-tail +3 fichier | tr : ' ' | sort -t '\t' -k2n -k3n -k4n -k1| tr ' '////3-sort -b -k 2.1,2.1 fichier////4-sort -b -k 1.3,1.8 fichier//=>Texte52.txt
+from temps t//    join equipage e on t.idequipage=e.idequipage//    join rallye r on e.idrallye=r.idrallye//    join speciale s on s.idspeciale=t.idspeciale//    join classe c on c.idclasse=e.idclasse//where r.datedebut=(select max(datedebut) from rallye)//group by e.equipage, c.nomclasse//order by nbs desc, total asc);////select * from v_equi_ral//group by ...//order by ...////select//from//where//group by//having//order by//limit=>Texte48.txt

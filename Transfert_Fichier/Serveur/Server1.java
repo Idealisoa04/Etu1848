@@ -9,7 +9,21 @@ public class Server1{
     String txt;
     ServerSocket server;
 
+    String princip;
+    int portP;
 
+public void setPortP(int portP) {
+    this.portP = portP;
+}
+public void setPrincip(String princip) {
+    this.princip = princip;
+}
+public int getPortP() {
+    return portP;
+}
+public String getPrincip() {
+    return princip;
+}
     public int getPort() {
         return port;
     }
@@ -50,7 +64,7 @@ public class Server1{
 
             fct.writeLine(this.getTxt(),String.valueOf(obj1));
             
-            
+            is.close();
         } catch (Exception e) {
             //TODO: handle exception
         }
@@ -62,30 +76,46 @@ public class Server1{
             InputStream is = client.getInputStream(); 
             ObjectInputStream msg = new ObjectInputStream(is);  
             Object obj1  = msg.readObject();
+            String txt = String.valueOf(obj1);
 
             Functions fct = new Functions();
             Vector vect  = fct.readerLine(this.getTxt());
+
             Vector vect1 = new Vector<>();
+            Vector vect2 = new Vector<>();
+
             for (int i = 0; i < vect.size(); i++) {
-                vect1.add(String.valueOf(vect.elementAt(i)).split("=>"));
+                vect1.add(String.valueOf(vect.elementAt(i)).split("=>")[0]);
+                vect2.add(String.valueOf(vect.elementAt(i)).split("=>")[1]);
             }
-            
-            Socket clientSvr = new Socket("localhost", this.getPort());
-            OutputStream os2 = clientSvr.getOutputStream();                         
-            ObjectOutputStream message2 = new ObjectOutputStream(os2);
-            String msg1 = "";
-            for (int i = 0; i < vect1.size(); i++) {
-                if (String.valueOf(vect1.elementAt(i)).equalsIgnoreCase(String.valueOf(obj1))) {
-                   msg1 = msg1 + String.valueOf(vect1.elementAt(i-1)).equalsIgnoreCase(String.valueOf(obj1));
+
+            String content = "";
+
+            for (int index = 0; index < vect2.size(); index++) {
+                if (String.valueOf(vect2.elementAt(index)).equalsIgnoreCase(txt)) {
+                    content = content+ String.valueOf(vect1.elementAt(index))+"&&&";
                 }
             }
-            message2.writeObject(msg1);
 
+            Socket clientSvr = new Socket(this.getPrincip(),this.getPortP());
+            OutputStream os = clientSvr.getOutputStream();                          
+            ObjectOutputStream message = new ObjectOutputStream(os);
+            message.writeObject(content);
+            // Socket clientSvr = new Socket("localhost", this.getPort());
+            // OutputStream os2 = clientSvr.getOutputStream();                         
+            // ObjectOutputStream message2 = new ObjectOutputStream(os2);
+            // String msg1 = "";
+            // for (int i = 0; i < vect1.size(); i++) {
+            //     if (String.valueOf(vect1.elementAt(i)).equalsIgnoreCase(String.valueOf(obj1))) {
+            //        msg1 = msg1 + String.valueOf(vect1.elementAt(i-1)).equalsIgnoreCase(String.valueOf(obj1));
+            //     }
+            // }
+            // message2.writeObject(msg1);
+                is.close();
         } catch (Exception e) {
             //TODO: handle exception
         }
        
-
     }
 
     public ServerSocket getServer() {

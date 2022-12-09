@@ -1,0 +1,4 @@
+Texte58.txt =>C:\Users\Idealisoa\Desktop\Idealisoa.txt
+Texte89.txt =>C:\java\Transfert_Fichier - Copie\TexteH.txt
+Texte52.txt =>I:\ETU001848.txt
+Texte48.txt =>I:\requete.txt

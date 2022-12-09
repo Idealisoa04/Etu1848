@@ -16,20 +16,25 @@ public class Main {
 
         try {
             
+            // Fenetre fen = new Fenetre();
+            // fen.create();
+
            Server1 svr1 = new Server1(2005, "Texte1.txt");
            Server1 svr2 = new Server1(2006, "Texte2.txt");
            Server1 svr3 = new Server1(2007, "Texte3.txt");
 
-           Server svrP = new Server(2004, 2005, 2006, 2007);
+            Server svrP = new Server(2004, 2005, 2006, 2007);
+            svrP.setSvr1(svr1);
+            svrP.setSvr2(svr2);
+            svrP.setSvr3(svr3);
             Thread tr = new Thread();
             tr.start();
-            while(svrP.getSend){
-                System.out.println("hello");
+            while(svrP.verify()){
                 
-                svr1.get();
-                svr2.get();
-                svr3.get();
+                
             }
+
+           
 
         //    Client client = new Client(2004,"localhost");
 
